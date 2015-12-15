@@ -1,0 +1,12 @@
+Package: roadcv
+Version: 0.1
+Section: utils
+Maintainer: Bob Mottram <fuzzgun@gmail.com>
+Architecture: all
+Depends: gpsd, libgps-dev, libcv4, libhighgui4, libcvaux4, libgtk2.0-dev, libavcodec-dev, libavformat-dev, libjpeg62-dev, libtiff4-dev, libgstreamer-plugins-base0.10-0
+Recommends: 
+Suggests: 
+Essential: no
+Priority: optional
+Homepage: https://launchpad.net/roadcv
+Description: A utility for vehicle based computer vision

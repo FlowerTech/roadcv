@@ -1,0 +1,68 @@
+rcv: A utility for analysis of vehicle images
+---------------------------------------------
+
+By Bob Mottram, fuzzgun@gmail.com
+
+Summary
+-------
+
+This utility allows you to analyse an image taken from a vehicle mounted camera.  The camera will typically be mounted somewhere on the front of the vehicle or on the dashboard or rear view mirror, pointing in a forwards direction.  It is assumed that the image provided has already been rectified, and that the camera has zero roll such that the horizon appears horizontal.
+
+Options
+-------
+
+-f  --filename        Image to be loaded.  This must be in PNG format.
+    --elevation       Elevation of the camera above the ground in millimetres.
+    --fov             Field of view of the camera in degrees.
+    --tilt            Tilt angle of the camera in degrees.  Positive tilt is towards the ground.
+    --lanes           Show detected lanes.
+    --signs           Detect road signs.
+    --lights          Detect traffic lights.
+    --vehicles        Detect possible vehicles.
+    --signsdata       Load road signs database.
+    --learn           Learn new road signs.
+    --debug           Saves debugging images showing different stanges of analysis.
+    --colourmodel     Update road sign colour model.
+    --projectedwidth  Width of the projected image
+    --projectedheight Height of the projected image
+
+Examples
+--------
+
+    rcv -f myimage.png --elevation 1000 --debug --lanes --vehicles --lights
+
+The results are output in XML format, so this can be piped into other applications as required.  For example:
+
+    <?xml encoding="ISO-8859-1"?>
+    <Roadcv>
+        <Image>myimage.png</Image>
+        <Resolution>320 240</Resolution>
+        <Vehicles>
+            <PossibleVehicle>
+                <ImageRegion>84 106 129 132</ImageRegion>
+                <RangeMillimetres>8462</RangeMillimetres>
+            </PossibleVehicle>
+        </Vehicles>
+        <LaneMarkings>
+            <Left>
+                <LinePixels>33 138 5 154</LinePixels>
+                <LineMillimetres>-3450 3675 -3900 4275</LineMillimetres>
+            </Left>
+            <Right>
+                <LinePixels>178 138 242 181</LinePixels>
+                <LineMillimetres>1050 3150 525 4275</LineMillimetres>
+            </Right>
+        </LaneMarkings>
+        <TrafficLights>
+            <PossibleTrafficLight>
+                <ImageRegion>222 35 237 62</ImageRegion>
+                <State>Green</State>
+            </PossibleTrafficLight>
+            <PossibleTrafficLight>
+                <ImageRegion>79 40 90 66</ImageRegion>
+                <State>Green</State>
+            </PossibleTrafficLight>
+        </TrafficLights>
+    </Roadcv>
+
+LinePixels give the image coordinates (x0,y0,x1,y1) of lines for the left and right hand lane markings.  These figures are also given in real world coordinates in millimetres.  For the millimetre values the first figure is to the right of the vehicle and the second is ahead of the vehicle (so negatives are to the left).

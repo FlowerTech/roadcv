@@ -1,0 +1,12 @@
+Package: rcv
+Version: 0.1
+Section: utils
+Maintainer: Bob Mottram <fuzzgun@gmail.com>
+Architecture: all
+Depends: libpng12-0
+Recommends: 
+Suggests: 
+Essential: no
+Priority: optional
+Homepage: https://launchpad.net/roadcv
+Description: A command line utility to analyse images taken from a vehicle mounted camera.  Images must be in PNG format.
